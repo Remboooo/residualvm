@@ -73,8 +73,10 @@ SdlEventSource::SdlEventSource()
 
 		// Enable joystick
 		if (SDL_NumJoysticks() > 0) {
-			debug("Using joystick: %s", SDL_JoystickName(0));
+			debug("Using joystick: %s\n", SDL_JoystickName(0));
 			_joystick = SDL_JoystickOpen(joystick_num);
+		} else {
+			debug("No joystick detected\n");
 		}
 	}
 }
@@ -398,6 +400,8 @@ bool SdlEventSource::dispatchSDLEvent(SDL_Event &ev, Common::Event &event) {
 		return handleJoyButtonUp(ev, event);
 	case SDL_JOYAXISMOTION:
 		return handleJoyAxisMotion(ev, event);
+	case SDL_JOYHATMOTION:
+		return handleJoyHatMotion(ev, event);
 
 	case SDL_VIDEOEXPOSE:
 		if (_graphicsManager)
@@ -646,6 +650,10 @@ bool SdlEventSource::handleJoyButtonUp(SDL_Event &ev, Common::Event &event) {
 		}
 	}
 	return true;
+}
+
+bool SdlEventSource::handleJoyHatMotion(SDL_Event &ev, Common::Event &event) {
+	return false;
 }
 
 bool SdlEventSource::handleJoyAxisMotion(SDL_Event &ev, Common::Event &event) {

@@ -28,6 +28,8 @@
 
 #include "common/events.h"
 
+#include <stdint.h>
+
 
 /**
  * The SDL event source.
@@ -111,6 +113,7 @@ protected:
 	virtual bool handleJoyButtonDown(SDL_Event &ev, Common::Event &event);
 	virtual bool handleJoyButtonUp(SDL_Event &ev, Common::Event &event);
 	virtual bool handleJoyAxisMotion(SDL_Event &ev, Common::Event &event);
+	virtual bool handleJoyHatMotion(SDL_Event &ev, Common::Event &event);
 	virtual void handleKbdMouse();
 
 	//@}
